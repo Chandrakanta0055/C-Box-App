@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:c_box/pages/loginPages.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

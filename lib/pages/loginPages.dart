@@ -1,3 +1,4 @@
+import 'package:c_box/BottomNavigationBar.dart';
 import 'package:c_box/pages/SignUpPages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,6 +17,31 @@ class _LoginPagesState extends State<LoginPages> {
   TextEditingController passwordController=TextEditingController();
   FocusNode passowrdNode= FocusNode();
 
+
+  void Login()
+  {
+    String emailId="Chandra";
+    String password="1234";
+    if(emailController.text.toString().isNotEmpty && passwordController.text.toString().isNotEmpty )
+      {
+        if(emailId == emailController.text.toString() && password== passwordController.text.toString())
+          {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> BottomNavBar()));
+          }
+
+
+      }
+    else{
+      print("enter field");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
 
 
   @override
@@ -101,7 +127,13 @@ class _LoginPagesState extends State<LoginPages> {
 
             // UiHelper.CustomTextFiled(passwordController, "Enter your Password", Icons.password, true),
             SizedBox(height: 60,),
-            UiHelper.CustomButton(() { }, "Login"),
+            UiHelper.CustomButton(() {
+
+              setState(() {
+                Login();
+              });
+
+            }, "Login"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
