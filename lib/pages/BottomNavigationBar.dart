@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'Screens/AddPostPage.dart';
 import 'Screens/CameraPage.dart';
 import 'Screens/HomePage.dart';
@@ -15,10 +14,10 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  late int index=2;
+  late int index=0;
 
   final pages=[
-    HomePage(),
+    MyHomePage(),
     SearchPage(),
     AddPostPage(),
     CameraPage(),
@@ -57,7 +56,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               onTap: (index){
                 setState(() {
                   this.index=index;
-
                 });
 
               },
