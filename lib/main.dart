@@ -1,7 +1,7 @@
 import 'package:c_box/pages/splashPage.dart';
 import 'package:flutter/material.dart';
 
-import 'BottomNavigationBar.dart';
+import 'pages/BottomNavigationBar.dart';
 
 void main() {
   runApp(MaterialApp(

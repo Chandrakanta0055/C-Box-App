@@ -1,4 +1,4 @@
-import 'package:c_box/BottomNavigationBar.dart';
+import 'package:c_box/pages/BottomNavigationBar.dart';
 import 'package:c_box/pages/SignUpPages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,7 +20,7 @@ class _LoginPagesState extends State<LoginPages> {
 
   void Login()
   {
-    String emailId="Chandra";
+    String emailId="cbox";
     String password="1234";
     if(emailController.text.toString().isNotEmpty && passwordController.text.toString().isNotEmpty )
       {
@@ -47,6 +47,7 @@ class _LoginPagesState extends State<LoginPages> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+
       appBar: AppBar(
         title: Text("Login Page",style: (TextStyle(fontWeight: FontWeight.bold)),),
         centerTitle: true,

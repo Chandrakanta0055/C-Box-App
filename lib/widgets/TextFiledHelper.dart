@@ -40,6 +40,7 @@ class UiHelper{
       },
 
       style: ElevatedButton.styleFrom(
+        elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

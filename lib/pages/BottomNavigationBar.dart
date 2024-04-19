@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'Screens/AddPostPage.dart';
-import 'Screens/CameraPage.dart';
-import 'Screens/HomePage.dart';
-import 'Screens/ProfilePage.dart';
-import 'Screens/SearchPage.dart';
+import '../Screens/AddPostPage.dart';
+import '../Screens/CameraPage.dart';
+import '../Screens/HomePage.dart';
+import '../Screens/ProfilePage.dart';
+import '../Screens/SearchPage.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
