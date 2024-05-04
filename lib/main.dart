@@ -6,8 +6,8 @@ import 'pages/BottomNavigationBar.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SplashScreen(),
-    // home: BottomNavBar(),
+    // home: SplashScreen(),
+    home: BottomNavBar(),
   ));
 
 }

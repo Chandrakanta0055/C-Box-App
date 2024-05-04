@@ -15,8 +15,11 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text("C Box",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+          // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Colors.white,
+          leadingWidth: 100,
+          leading:  Center(child: Text("C Box",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black),)),
+          // title: Text("C Box",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
           //leading: SizedBox(width:23,height:19,child: Image.asset('assets/images/camera.jpg')),
           actions: [
             Padding(
