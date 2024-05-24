@@ -1,8 +1,11 @@
 import 'package:c_box/pages/BottomNavigationBar.dart';
 import 'package:c_box/pages/SignUpPages.dart';
+import 'package:c_box/widgets/FirebaseHelper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../Modals/UserModel.dart';
 import '../widgets/TextFiledHelper.dart';
 
 class LoginPages extends StatefulWidget {
@@ -18,22 +21,36 @@ class _LoginPagesState extends State<LoginPages> {
   FocusNode passowrdNode= FocusNode();
 
 
-  void Login()
+  void Login() async
   {
-    String emailId="cbox";
-    String password="1234";
-    if(emailController.text.toString().isNotEmpty && passwordController.text.toString().isNotEmpty )
+    User? user= FirebaseAuth.instance.currentUser;
+    String email= emailController.text.trim();
+    String pass= passwordController.text.trim();
+    if(email =="" || pass =="")
       {
-        if(emailId == emailController.text.toString() && password== passwordController.text.toString())
-          {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> BottomNavBar()));
-          }
-
+        print("enter all the field");
 
       }
     else{
-      print("enter field");
+      String? res= await helper().FirebaseLogin(email, pass);
+
+      if(res =="sucessful")
+        {
+          if(user!= null) {
+            UserModel? newUser = await helper().getUserById(user.uid.toString());
+            print("sucessfully navigate");
+
+            Navigator.pushReplacement(context, MaterialPageRoute(
+                builder: (context) => BottomNavBar(userModel: newUser!)));
+          }
+        }
+      else
+        {
+
+        }
+
     }
+
   }
 
   @override

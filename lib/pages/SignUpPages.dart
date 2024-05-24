@@ -1,3 +1,4 @@
+import 'package:c_box/widgets/FirebaseHelper.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/TextFiledHelper.dart';
@@ -16,6 +17,24 @@ class _SignUpPagesState extends State<SignUpPages> {
   TextEditingController userIdController =TextEditingController();
 
 
+  void signIn() async
+  {
+    String email= emailController.text.trim();
+    String pass= passwordController.text.trim();
+    String userName= userIdController.text.trim();
+
+    if(email =="" || pass =="" || userName =="")
+      {
+        print("enter all the field");
+      }
+    else{
+         String? res=  await helper().SignUp(email, userName, pass);
+         print(res);
+
+        }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +45,15 @@ class _SignUpPagesState extends State<SignUpPages> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 70,),
+            SizedBox(height: 30,),
             UiHelper.CustomTextFiled(userIdController, "User id", Icons.person, false),
             UiHelper.CustomTextFiled(emailController, "Email", Icons.email, false),
             UiHelper.CustomTextFiled(passwordController, "Password", Icons.password, true),
-            SizedBox(height: 100,),
+            SizedBox(height: 50,),
             UiHelper.CustomButton(() {
               // signup(emailController.text.toString(), passwordController.text.toString());
+              signIn();
+
             }, "SignUp"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
