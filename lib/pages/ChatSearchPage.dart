@@ -108,7 +108,7 @@ class _ChatSearchPageState extends State<ChatSearchPage> {
                     {
                       QuerySnapshot querySnap= snapshot.data as QuerySnapshot;
                       if(querySnap.docs.length > 0) {
-                        UserModel targetUser = UserModel.fromUser(
+                        UserModel targetUser = UserModel.fromMap(
                             querySnap.docs[0].data() as Map<String, dynamic>);
                         return ListTile(
                           onTap: ()async

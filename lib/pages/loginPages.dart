@@ -37,7 +37,7 @@ class _LoginPagesState extends State<LoginPages> {
       if(res =="sucessful")
         {
           if(user!= null) {
-            UserModel? newUser = await helper().getUserById(user.uid.toString());
+            UserModel? newUser = await helper().getUserById(FirebaseAuth.instance.currentUser!.uid!.toString());
             print("sucessfully navigate");
 
             Navigator.pushReplacement(context, MaterialPageRoute(

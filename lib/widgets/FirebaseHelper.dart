@@ -87,7 +87,7 @@ class helper{
     UserCredential? userCredential;
       try
         {
-         userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+         userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
          print("user created");
 
 
@@ -143,7 +143,7 @@ class helper{
     try {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection("users").doc(id).get();
       if(snapshot.data() != null) {
-        userModel = UserModel.fromUser(snapshot.data() as Map<String, dynamic>);
+        userModel = UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
       }
     }
     catch(er)

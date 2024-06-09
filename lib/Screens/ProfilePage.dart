@@ -3,7 +3,10 @@ import 'package:c_box/Modals/imageModel.dart';
 import 'package:c_box/pages/loginPages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/Videocontroller.dart';
 
 class ProfilePage extends StatefulWidget {
   final UserModel userModel;
@@ -14,9 +17,37 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  String? res;
+  bool check= false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    if(check== false) {
+      if (widget.userModel.followers!.contains(
+          FirebaseAuth.instance.currentUser!.uid!)) {
+        res = "unfollow";
+      }
+      else {
+        res = "follow";
+      }
+      check =true;
+    }
+  }
+
+  checkRes() async
+  {
+    res = await  FollowUser(widget.userModel!);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
 
       body: SingleChildScrollView(
         child: Container(
@@ -28,9 +59,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(width: 10,),
+                  if(widget.userModel.uid != FirebaseAuth.instance.currentUser!.uid!)
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.arrow_back)),
                   Text(widget.userModel!.userName!,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700),),
                   SizedBox(width:MediaQuery.of(context).size.width *0.7 ,),
 
+                  if(widget.userModel.uid == FirebaseAuth.instance.currentUser!.uid!)
                   IconButton(
                     onPressed: () {
                       Navigator.popUntil(context, (route) => route.isFirst);
@@ -41,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.exit_to_app_outlined,
                     ),
                   ),
-                  SizedBox(width: 10,)
+                  SizedBox(width: 16,)
 
                 ],
               ),
@@ -53,12 +89,42 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 30,),
 
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+
+                mainAxisAlignment: widget.userModel.uid == FirebaseAuth.instance.currentUser!.uid! ?  MainAxisAlignment.center : MainAxisAlignment.start,
                 children: [
+                  SizedBox(width: 30,),
                   CircleAvatar(
                     radius: 40,
                     child: Icon(Icons.person),
                   ),
+
+                  if(widget.userModel.uid != FirebaseAuth.instance.currentUser!.uid!)
+                      Container(
+                        margin: EdgeInsets.only(left: 30),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                setState(() {
+                               checkRes();
+                                });
+                              },
+                              child: Card(
+                                child: Container(
+                                  width: 80,
+                                  height: 40,
+                                  child: Center(child: Text(res!,
+                                    style: TextStyle(fontWeight: FontWeight.bold,
+                                        color: Colors.black),)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+
+
+
                 ],
               ),
               Text(widget.userModel.userName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
@@ -89,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 
                                 Text(widget.userModel.follow!.length!.toString(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                                 SizedBox(height: 4),
-                                Text("Following",style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                Text("Follow",style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                               ],
                             ),
                             SizedBox(width: 20),

@@ -100,8 +100,8 @@ class Helper {
           password: password,
           uid: userCredential.user!.uid,
           userName: userName,
-          followers: null,
-          follow: null,
+          followers: [],
+          follow: [],
         );
 
         await FirebaseFirestore.instance.collection("users").doc(userCredential.user!.uid.toString()).set(userModel.toMap());
@@ -141,7 +141,7 @@ class Helper {
     try {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection("users").doc(id).get();
       if (snapshot.data() != null) {
-        userModel = UserModel.fromUser(snapshot.data() as Map<String, dynamic>);
+        userModel = UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
       }
     } catch (er) {
       print(er.toString());
